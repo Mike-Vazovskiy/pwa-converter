@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PWA Converter</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -30,6 +31,10 @@
     </div>
 
     <script>
+        if('serviceWorker' in navigator){
+            navigator.serviceWorker
+                .register('sw.js')
+        }
         document.getElementById('uploadForm').addEventListener('submit', async (event) => {
             event.preventDefault();
             const formData = new FormData(event.target);
