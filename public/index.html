@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="theme-container">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PWA Converter</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -21,6 +22,11 @@
             <button type="submit">Конвертировать в PWA</button>
         </form>
         <div id="message"></div>
+        
+        <button id="theme-btn" class="theme-btn">
+            <span class="material-icons icon-sun">wb_sunny</span>
+            <span class="material-icons icon-moon">nights_stay</span>
+        </button>
     </div>
 
     <script>
@@ -46,6 +52,36 @@
                 document.getElementById('message').innerText = 'Ошибка во время конвертации.';
             }
         });
+
+        const themeBtn = document.getElementById('theme-btn');
+        const themeContainer = document.getElementById('theme-container');
+
+        function toggleTheme() {
+            themeContainer.classList.toggle('dark-theme');
+            localStorage.setItem('theme', themeContainer.classList.contains('dark-theme') ? 'dark' : 'light');
+            updateIcon();
+        }
+
+        function updateIcon() {
+            const sunIcon = themeBtn.querySelector('.icon-sun');
+            const moonIcon = themeBtn.querySelector('.icon-moon');
+            if (themeContainer.classList.contains('dark-theme')) {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'inline';
+            } else {
+                sunIcon.style.display = 'inline';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        themeBtn.addEventListener('click', toggleTheme);
+
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            themeContainer.classList.add('dark-theme');
+        }
+        updateIcon(); 
     </script>
 </body>
 </html>

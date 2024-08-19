@@ -1,17 +1,36 @@
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --container-bg: #fff;
+    --btn-bg: #28a745;
+    --btn-hover: #218838;
+}
+
+.dark-theme {
+    --bg-color: #333;
+    --text-color: #f4f4f4;
+    --container-bg: #444;
+    --btn-bg: #007bff;
+    --btn-hover: #0056b3;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 .container {
     max-width: 600px;
     margin: auto;
-    background: white;
+    background: var(--container-bg);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
 }
 
 h1 {
@@ -38,20 +57,53 @@ input[type="file"] {
 
 button {
     padding: 10px;
-    background-color: #28a745;
+    background-color: var(--btn-bg);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: var(--btn-hover);
 }
 
 #message {
     margin-top: 20px;
     text-align: center;
-    color: #ff0000; /* Красный цвет для ошибок */
+    color: #ff0000; 
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    width: fit-content;
+}
+
+.theme-btn:hover {
+    background-color: transparent !important;
+}
+
+.material-icons {
+    font-size: 24px;
+    transition: opacity 0.4s;
+}
+
+.icon-sun {
+    color: #d7d7d7;
+}
+
+.icon-moon {
+    display: none;
 }
