@@ -1,4 +1,5 @@
-
+Website to PWA converter
+========================
 To start use next commands:
       npm install
       node server.js
