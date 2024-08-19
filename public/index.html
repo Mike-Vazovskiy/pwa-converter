@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PWA Converter</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="siteZip">Выберите архив:</label>
+                <input type="file" id="siteZip" name="siteZip" accept=".zip" required>
+            </div>
+            <div class="form-group">
+                <label for="icon">Выберите иконку:</label>
+                <input type="file" id="icon" name="icon" accept="image/png" required>
+            </div>
+            <button type="submit">Конвертировать в PWA</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const response = await fetch('/convert-to-pwa', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'modified-site.zip';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                document.getElementById('message').innerText = 'Конвертация успешна! Загружается...';
+            } else {
+                document.getElementById('message').innerText = 'Ошибка во время конвертации.';
+            }
+        });
+    </script>
+</body>
+</html>
